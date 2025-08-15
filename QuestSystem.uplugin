@@ -1,0 +1,24 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "1.0",
+	"FriendlyName": "QuestSystem",
+	"Description": "Flexible and Powerful yet simple Quest systems for projects of any size.",
+	"Category": "Other",
+	"CreatedBy": "Ebrahim Mottaghi Rezaei",
+	"CreatedByURL": "https://www.linkedin.com/in/ebrahim-mr/",
+	"DocsURL": "",
+	"MarketplaceURL": "",
+	"SupportURL": "",
+	"CanContainContent": true,
+	"IsBetaVersion": true,
+	"IsExperimentalVersion": false,
+	"Installed": false,
+	"Modules": [
+		{
+			"Name": "QuestSystem",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		}
+	]
+}
