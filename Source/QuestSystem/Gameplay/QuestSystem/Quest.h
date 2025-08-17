@@ -120,6 +120,9 @@ public:
 	}
 
 	UFUNCTION( BlueprintCallable, Category = "Quest" )
+	void EvaluateStatus();
+
+	UFUNCTION( BlueprintCallable, Category = "Quest" )
 	virtual void UpdateStatus(EQuestStatus NewStatus);
 
 protected:

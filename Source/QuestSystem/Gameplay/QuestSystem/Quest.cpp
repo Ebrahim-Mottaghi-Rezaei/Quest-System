@@ -29,35 +29,6 @@ UQuest::~UQuest() {
 	QuestComponent.Reset();
 }
 
-void UQuest::UpdateStatus(const EQuestStatus NewStatus) {
-	if ( Status == NewStatus )
-		return;
-
-	if ( IsValid( Condition ) )
-		if ( NewStatus == EQuestStatus::Active ) {
-			Status = Condition->Evaluate_Implementation();
-
-			if ( Status == EQuestStatus::Completed || Status == EQuestStatus::Failed ) {
-				Notify_StatusChanged( this, Status );
-				return;
-			}
-			if ( !QuestComponent.IsValid() )
-				QuestComponent = GetQuestComponent();
-
-			QuestComponent->OnQuestStatusChanged.AddDynamic( this, &ThisClass::OnQuestStatusChanged );
-		}
-
-	Status = NewStatus;
-	Notify_StatusChanged( this, Status );
-}
-
-void UQuest::OnQuestStatusChanged(UQuest* Quest, EQuestStatus NewStatus) {
-	if ( NewStatus == EQuestStatus::Failed )
-		UpdateStatus( EQuestStatus::Failed );
-	else if ( Condition->Evaluate_Implementation() == EQuestStatus::Completed )
-		UpdateStatus( EQuestStatus::Completed );
-}
-
 void UQuest::Tick(float DeltaTime) {
 	TickQuest( DeltaTime );
 }
@@ -98,6 +69,66 @@ UInventoryComponent* UQuest::GetInventoryComponent() const {
 	return IQuestInterface::Execute_GetInventoryComponent( PlayerController );
 }
 
+void UQuest::EvaluateStatus() {
+	if ( !IsValid( Condition ) )
+		return;
+
+	const auto EvaluationResult = Condition->Evaluate();
+
+	if ( Status == EvaluationResult )
+		return;
+
+	if ( EvaluationResult == EQuestStatus::Completed || EvaluationResult == EQuestStatus::Failed ) {
+		Status = EvaluationResult;
+		Notify_StatusChanged( this, Status );
+	}
+}
+
+void UQuest::UpdateStatus(const EQuestStatus NewStatus) {
+	if ( Status == NewStatus )
+		return;
+
+	if ( IsValid( Condition ) )
+		if ( NewStatus == EQuestStatus::Active ) {
+			Condition->Initialize();
+
+			EvaluateStatus();
+
+			if ( Status == EQuestStatus::Completed || Status == EQuestStatus::Failed )
+				return;
+
+			if ( !QuestComponent.IsValid() )
+				QuestComponent = GetQuestComponent();
+
+			QuestComponent->OnQuestStatusChanged.AddDynamic( this, &ThisClass::OnQuestStatusChanged );
+		}
+
+	Status = NewStatus;
+	Notify_StatusChanged( this, Status );
+}
+
+void UQuest::OnQuestStatusChanged(UQuest* Quest, EQuestStatus NewStatus) {
+	if ( NewStatus == EQuestStatus::Failed )
+		UpdateStatus( EQuestStatus::Failed );
+	else if ( Condition->Evaluate_Implementation() == EQuestStatus::Completed )
+		UpdateStatus( EQuestStatus::Completed );
+}
+
+UWorld* UQuest::GetWorld() const {
+	if ( HasAllFlags( RF_ClassDefaultObject ) )
+		return nullptr;
+
+	auto Outer = GetOuter();
+
+	while ( Outer->IsValidLowLevelFast() ) {
+		if ( UWorld* World = Outer->GetWorld() )
+			return World;
+
+		Outer = Outer->GetOuter();
+	}
+
+	return nullptr;
+}
 #if WITH_EDITOR
 FColor UQuest::GetColorBasedOnStatus(const EQuestStatus NewStatus) {
 	switch ( NewStatus ) {
@@ -122,19 +153,3 @@ void UQuest::PostDuplicate(bool bDuplicateForPIE) {
 }
 
 #endif
-
-UWorld* UQuest::GetWorld() const {
-	if ( HasAllFlags( RF_ClassDefaultObject ) )
-		return nullptr;
-
-	auto Outer = GetOuter();
-
-	while ( Outer->IsValidLowLevelFast() ) {
-		if ( UWorld* World = Outer->GetWorld() )
-			return World;
-
-		Outer = Outer->GetOuter();
-	}
-
-	return nullptr;
-}
