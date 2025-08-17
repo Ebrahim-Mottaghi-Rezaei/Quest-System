@@ -18,7 +18,7 @@ Supports multiple quest types, custom conditions, inventory-based objectives, ti
 - **Inventory Integration**
   - Built-in `InventoryComponent` for item tracking
 - **Data-Driven**
-  - `GameplayItemData` and `Quest` Data Assets for easy editing in the editor
+  - `GameplayItemData` Data Assets and `Quest` Object for easy editing in the editor
 - **Gameplay Actors**
   - `QuestActor`, `QuestTriggerBox` for world interactions
 - **UI Ready**
