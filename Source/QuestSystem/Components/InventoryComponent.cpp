@@ -23,3 +23,7 @@ void UInventoryComponent::AddToInventory(UGameplayItemData* Item, int Count) {
 uint8 UInventoryComponent::GetItemCount(UGameplayItemData* Item) const {
 	return Inventory.FindRef( Item->GetId() );
 }
+
+bool UInventoryComponent::HasItem(UGameplayItemData* Item) const {
+	return Inventory.FindRef( Item->GetId() ) > 0;
+}

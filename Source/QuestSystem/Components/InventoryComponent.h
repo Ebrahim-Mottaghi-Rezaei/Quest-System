@@ -62,4 +62,7 @@ public:
 
 	UFUNCTION( BlueprintCallable )
 	uint8 GetItemCount(UGameplayItemData* Item) const;
+
+	UFUNCTION( BlueprintCallable )
+	bool HasItem(UGameplayItemData* Item) const;
 };

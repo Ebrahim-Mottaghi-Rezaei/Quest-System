@@ -3,7 +3,10 @@
 #include "QuestCondition.h"
 
 UQuestCondition::UQuestCondition() {}
+
 UQuestCondition::~UQuestCondition() {}
+
+void UQuestCondition::Initialize_Implementation() {}
 
 UWorld* UQuestCondition::GetWorld() const {
 	if ( HasAllFlags( RF_ClassDefaultObject ) )

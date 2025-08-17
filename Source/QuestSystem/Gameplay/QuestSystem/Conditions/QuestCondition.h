@@ -11,6 +11,8 @@ UCLASS( Abstract, Blueprintable, EditInlineNew )
 class QUESTSYSTEM_API UQuestCondition : public UObject {
 	GENERATED_BODY()
 
+	friend class UQuest;
+
 public:
 	UQuestCondition();
 
@@ -18,6 +20,9 @@ public:
 
 protected:
 	UFUNCTION( BlueprintnativeEvent, Category = "QuestCondition" )
+	void Initialize();
+
+	UFUNCTION( BlueprintCallable, BlueprintnativeEvent, Category = "QuestCondition" )
 	EQuestStatus Evaluate();
 
 	virtual UWorld* GetWorld() const override;
