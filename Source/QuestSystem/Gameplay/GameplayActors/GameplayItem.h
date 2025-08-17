@@ -17,6 +17,6 @@ public:
 	AGameplayItem();
 
 protected:
-	UPROPERTY( BlueprintReadOnly, EditAnywhere )
+	UPROPERTY( BlueprintReadOnly, EditAnywhere, meta=(ExposeOnSpawn=true) )
 	UGameplayItemData* Item;
 };
