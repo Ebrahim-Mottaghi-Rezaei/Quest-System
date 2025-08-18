@@ -72,9 +72,6 @@ DerivedDataCache/*
 #idea folder
 .idea
 
-#zipped file 
-*.rar
-*.zip
 /Config/HoloLens/HoloLensEngine.ini
 /.vsconfig
 *.ipch
