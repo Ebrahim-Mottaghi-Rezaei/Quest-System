@@ -1,4 +1,4 @@
-﻿// Copyright Ebrahim Mottaghi Rezaei <https://www.linkedin.com/in/ebrahim-mr>. All Rights Reserved.
+﻿// Copyright Ebrahim Mottaghi Rezaei <https://www.linkedin.com/in/ebrahim-mr>. All Rights Reserved 2025. 
 
 #pragma once
 
@@ -22,7 +22,7 @@ protected:
 	// ReSharper disable once CppUEBlueprintImplementableEventNotImplemented
 	void K2_ItemAdded(UGameplayItemData* Item);
 
-	UFUNCTION( BlueprintCallable )
+	UFUNCTION( BlueprintCallable, Category="InventoryComponent" )
 	FORCEINLINE void Notify_ItemAdded(UGameplayItemData* Item) {
 		OnItemAdded.Broadcast( Item );
 		K2_ItemAdded( Item );
@@ -40,7 +40,7 @@ protected:
 	// ReSharper disable once CppUEBlueprintImplementableEventNotImplemented
 	void K2_ItemUpdated(UGameplayItemData* Item, uint8 Count);
 
-	UFUNCTION( BlueprintCallable )
+	UFUNCTION( BlueprintCallable, Category="InventoryComponent" )
 	FORCEINLINE void Notify_ItemUpdated(UGameplayItemData* Item, uint8 Count) {
 		OnItemUpdated.Broadcast( Item, Count );
 		K2_ItemUpdated( Item, Count );
@@ -53,16 +53,16 @@ public:
 	UInventoryComponent();
 
 protected:
-	UPROPERTY( BlueprintReadOnly )
+	UPROPERTY( BlueprintReadOnly, Category="InventoryComponent" )
 	TMap<FGuid, uint8> Inventory;
 
 public:
-	UFUNCTION( BlueprintCallable )
+	UFUNCTION( BlueprintCallable, Category="InventoryComponent" )
 	void AddToInventory(UGameplayItemData* Item, int Count);
 
-	UFUNCTION( BlueprintCallable )
+	UFUNCTION( BlueprintCallable, Category="InventoryComponent" )
 	uint8 GetItemCount(UGameplayItemData* Item) const;
 
-	UFUNCTION( BlueprintCallable )
+	UFUNCTION( BlueprintCallable, Category="InventoryComponent" )
 	bool HasItem(UGameplayItemData* Item) const;
 };

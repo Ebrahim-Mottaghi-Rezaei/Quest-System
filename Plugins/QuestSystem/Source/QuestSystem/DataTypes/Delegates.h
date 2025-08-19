@@ -1,4 +1,4 @@
-﻿// Copyright Ebrahim Mottaghi Rezaei <https://www.linkedin.com/in/ebrahim-mr>. All Rights Reserved.
+﻿// Copyright Ebrahim Mottaghi Rezaei <https://www.linkedin.com/in/ebrahim-mr>. All Rights Reserved 2025. 
 
 #pragma once
 
@@ -6,7 +6,7 @@
 #include "Delegates.generated.h"
 
 UCLASS( Hidden, HideDropdown )
-class QUESTSYSTEM_API UDummy : public UObject {
+class QUESTSYSTEM_API UQuestDummy : public UObject {
 	GENERATED_BODY()
 };
 

@@ -1,4 +1,4 @@
-﻿// Copyright Ebrahim Mottaghi Rezaei <https://www.linkedin.com/in/ebrahim-mr>. All Rights Reserved.
+﻿// Copyright Ebrahim Mottaghi Rezaei <https://www.linkedin.com/in/ebrahim-mr>. All Rights Reserved 2025. 
 
 #pragma once
 
@@ -17,7 +17,7 @@ public:
 	UHasItemsCondition();
 
 protected:
-	UPROPERTY( EditAnywhere, BlueprintReadWrite )
+	UPROPERTY( EditAnywhere, BlueprintReadWrite, Category="Condition" )
 	TArray<FHasItemsConditionInfo> RequiredItems;
 
 public:

@@ -22,7 +22,7 @@ protected:
 	// ReSharper disable once CppUEBlueprintImplementableEventNotImplemented
 	void K2_QuestAdded(UQuest* Quest);
 
-	UFUNCTION( BlueprintCallable )
+	UFUNCTION( BlueprintCallable, Category="QuestComponent" )
 	FORCEINLINE void Notify_QuestAdded(UQuest* Quest) {
 		OnQuestAdded.Broadcast( Quest );
 		K2_QuestAdded( Quest );
@@ -39,7 +39,7 @@ protected:
 	// ReSharper disable once CppUEBlueprintImplementableEventNotImplemented
 	void K2_QuestStatusChanged(UQuest* Quest, EQuestStatus NewStatus);
 
-	UFUNCTION( BlueprintCallable )
+	UFUNCTION( BlueprintCallable, Category="QuestComponent" )
 	FORCEINLINE void Notify_QuestStatusChanged(UQuest* Quest, EQuestStatus NewStatus) {
 		OnQuestStatusChanged.Broadcast( Quest, NewStatus );
 		K2_QuestStatusChanged( Quest, NewStatus );
@@ -57,17 +57,17 @@ public:
 	virtual void BeginDestroy() override;
 
 protected:
-	UPROPERTY( BlueprintReadOnly )
+	UPROPERTY( BlueprintReadOnly, Category="QuestComponent" )
 	TMap<FGuid, UQuest*> ActiveQuests;
 
 public:
-	UFUNCTION( BlueprintCallable )
+	UFUNCTION( BlueprintCallable, Category="QuestComponent" )
 	void AddQuest(TSubclassOf<UQuest> Quest);
 
-	UFUNCTION( BlueprintCallable )
+	UFUNCTION( BlueprintCallable, Category="QuestComponent" )
 	void UpdateQuestStatus(TSubclassOf<UQuest> Quest, EQuestStatus Status);
 
-	UFUNCTION( BlueprintCallable )
+	UFUNCTION( BlueprintCallable, Category="QuestComponent" )
 	EQuestStatus GetQuestStatus(const FGuid& QuestId) const;
 
 	void RemoveQuestStatusChangeBinding(UQuest* Quest);

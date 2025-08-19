@@ -25,7 +25,7 @@ protected:
 	// ReSharper disable once CppUEBlueprintImplementableEventNotImplemented
 	void K2_StatusChanged(UQuest* Quest, EQuestStatus NewStatus);
 
-	UFUNCTION( BlueprintCallable )
+	UFUNCTION( BlueprintCallable, Category="Quest" )
 	FORCEINLINE void Notify_StatusChanged(UQuest* Quest, EQuestStatus NewStatus) {
 #if WITH_EDITOR
 		const auto Message = FString::Printf( TEXT( "Quest: %s state changed to: %s" ), *Name.ToString(), *StaticEnum<EQuestStatus>()->GetNameStringByValue( static_cast<int64>(NewStatus) ) );
@@ -52,25 +52,25 @@ public:
 	virtual ~UQuest() override;
 
 protected:
-	UPROPERTY( BlueprintReadOnly/*, EditAnywhere*/ )
+	UPROPERTY( BlueprintReadOnly, Category="Quest" )
 	FGuid Id;
 
-	UPROPERTY( EditAnywhere, BlueprintReadWrite )
+	UPROPERTY( EditAnywhere, BlueprintReadWrite, Category="Quest" )
 	FText Name;
 
-	UPROPERTY( EditAnywhere, BlueprintReadWrite )
+	UPROPERTY( EditAnywhere, BlueprintReadWrite, Category="Quest" )
 	FText GameplayText;
 
-	UPROPERTY( EditAnywhere, BlueprintReadWrite )
+	UPROPERTY( EditAnywhere, BlueprintReadWrite, Category="Quest" )
 	UTexture2D* Icon;
 
-	UPROPERTY( BlueprintReadOnly, VisibleAnywhere )
+	UPROPERTY( BlueprintReadOnly, VisibleAnywhere, Category="Quest" )
 	EQuestStatus Status;
 
-	UPROPERTY( BlueprintReadWrite, EditAnywhere, Instanced, meta=(editinlinenew, ShowInnerProperties, FullyExpand=true) )
+	UPROPERTY( BlueprintReadWrite, EditAnywhere, Instanced, Category="Quest", meta=(editinlinenew, ShowInnerProperties, FullyExpand=true) )
 	UQuestCondition* Condition;
 
-	UPROPERTY( BlueprintReadOnly, EditDefaultsOnly )
+	UPROPERTY( BlueprintReadOnly, EditDefaultsOnly, Category="Quest" )
 	bool bIsTickable;
 
 	// FTickableGameObject interface

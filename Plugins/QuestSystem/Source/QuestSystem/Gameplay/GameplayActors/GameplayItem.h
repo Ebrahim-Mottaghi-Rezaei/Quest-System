@@ -1,4 +1,4 @@
-﻿// Copyright Ebrahim Mottaghi Rezaei <https://www.linkedin.com/in/ebrahim-mr>. All Rights Reserved.
+﻿// Copyright Ebrahim Mottaghi Rezaei <https://www.linkedin.com/in/ebrahim-mr>. All Rights Reserved 2025. 
 
 #pragma once
 
@@ -17,6 +17,6 @@ public:
 	AGameplayItem();
 
 protected:
-	UPROPERTY( BlueprintReadOnly, EditAnywhere, meta=(ExposeOnSpawn=true) )
+	UPROPERTY( BlueprintReadOnly, EditAnywhere, meta=(ExposeOnSpawn=true), Category="GameplayItem" )
 	UGameplayItemData* Item;
 };

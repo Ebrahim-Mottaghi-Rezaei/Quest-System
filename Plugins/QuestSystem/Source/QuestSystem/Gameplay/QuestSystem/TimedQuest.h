@@ -1,4 +1,4 @@
-﻿// Copyright Ebrahim Mottaghi Rezaei <https://www.linkedin.com/in/ebrahim-mr>. All Rights Reserved.
+﻿// Copyright Ebrahim Mottaghi Rezaei <https://www.linkedin.com/in/ebrahim-mr>. All Rights Reserved 2025. 
 
 #pragma once
 
@@ -14,9 +14,9 @@ public:
 	UTimedQuest();
 
 protected:
-	UPROPERTY( EditDefaultsOnly, BlueprintReadWrite )
+	UPROPERTY( EditDefaultsOnly, BlueprintReadWrite, Category="Timed Quest" )
 	float ExpirationDelay = 10.f;
-	UPROPERTY( VisibleInstanceOnly, BlueprintReadOnly )
+	UPROPERTY( VisibleInstanceOnly, BlueprintReadOnly, Category="Timed Quest" )
 	float RemainingTime = 0.f;
 
 	virtual void Tick(float DeltaTime) override;
