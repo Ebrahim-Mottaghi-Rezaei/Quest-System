@@ -1,4 +1,4 @@
-﻿// Copyright Ebrahim Mottaghi Rezaei <https://www.linkedin.com/in/ebrahim-mr>. All Rights Reserved.
+﻿// Copyright Ebrahim Mottaghi Rezaei <https://www.linkedin.com/in/ebrahim-mr>. All Rights Reserved 2025. 
 
 #pragma once
 
@@ -6,7 +6,7 @@
 #include "Engine/DataAsset.h"
 #include "GameplayItemData.generated.h"
 
-UCLASS(Blueprintable)
+UCLASS( Blueprintable )
 class QUESTSYSTEM_API UGameplayItemData : public UDataAsset {
 	GENERATED_BODY()
 
@@ -14,16 +14,16 @@ public:
 	UGameplayItemData();
 
 protected:
-	UPROPERTY( BlueprintReadOnly, VisibleAnywhere )
+	UPROPERTY( BlueprintReadOnly, VisibleAnywhere, Category="GameplayItemData" )
 	FGuid Id;
 
-	UPROPERTY( EditAnywhere, BlueprintReadWrite )
+	UPROPERTY( EditAnywhere, BlueprintReadWrite, Category="GameplayItemData" )
 	FText Name;
 
-	UPROPERTY( EditAnywhere, BlueprintReadWrite )
+	UPROPERTY( EditAnywhere, BlueprintReadWrite, Category="GameplayItemData" )
 	FText GameplayText;
 
-	UPROPERTY( EditAnywhere, BlueprintReadWrite )
+	UPROPERTY( EditAnywhere, BlueprintReadWrite, Category="GameplayItemData" )
 	UTexture2D* Icon;
 
 #if WITH_EDITOR

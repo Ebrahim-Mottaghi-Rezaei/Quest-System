@@ -1,4 +1,4 @@
-﻿// Copyright Ebrahim Mottaghi Rezaei <https://www.linkedin.com/in/ebrahim-mr>. All Rights Reserved.
+﻿// Copyright Ebrahim Mottaghi Rezaei <https://www.linkedin.com/in/ebrahim-mr>. All Rights Reserved 2025. 
 
 #pragma once
 
@@ -16,7 +16,7 @@ public:
 	UHasCompletedTasks();
 
 protected:
-	UPROPERTY( EditAnywhere, BlueprintReadWrite )
+	UPROPERTY( EditAnywhere, BlueprintReadWrite, Category="Condition" )
 	TArray<TSubclassOf<UQuest>> RequiredQuests;
 
 	virtual EQuestStatus Evaluate_Implementation() override;

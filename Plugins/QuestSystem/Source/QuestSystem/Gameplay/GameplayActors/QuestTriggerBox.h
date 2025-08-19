@@ -17,12 +17,12 @@ public:
 	AQuestTriggerBox();
 
 protected:
-	UPROPERTY( EditAnywhere, BlueprintReadWrite )
+	UPROPERTY( EditAnywhere, BlueprintReadWrite, Category="Quest Trigger Box" )
 	EQuestTriggerVolumeAction Action;
 
-	UPROPERTY( EditAnywhere, BlueprintReadWrite )
+	UPROPERTY( EditAnywhere, BlueprintReadWrite, Category="Quest Trigger Box" )
 	TSubclassOf<UQuest> Quest;
-	UPROPERTY( EditAnywhere, BlueprintReadWrite, meta=(EditCondition="Action == EQuestTriggerVolumeAction::Update", EditConditionHides) )
+	UPROPERTY( EditAnywhere, BlueprintReadWrite, Category="Quest Trigger Box", meta=(EditCondition="Action == EQuestTriggerVolumeAction::Update", EditConditionHides) )
 	EQuestStatus NewStatus;
 
 	virtual void NotifyActorBeginOverlap(AActor* OtherActor) override;
