@@ -6,6 +6,8 @@
 #include "Engine/DataAsset.h"
 #include "GameplayItemData.generated.h"
 
+class UTexture2D;
+
 UCLASS( Blueprintable )
 class QUESTSYSTEM_API UGameplayItemData : public UDataAsset {
 	GENERATED_BODY()

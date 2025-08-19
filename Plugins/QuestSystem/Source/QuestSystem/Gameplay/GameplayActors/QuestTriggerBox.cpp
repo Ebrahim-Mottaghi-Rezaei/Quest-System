@@ -1,6 +1,8 @@
 ﻿// Copyright Ebrahim Mottaghi Rezaei [https://www.linkedin.com/in/ebrahim-mr/]. All Rights Reserved
 
 #include "QuestTriggerBox.h"
+#include "GameFramework/Pawn.h"
+#include "Gameframework/PlayerController.h"
 #include "QuestSystem/QuestSystem.h"
 #include "QuestSystem/Components/QuestComponent.h"
 #include "QuestSystem/Gameplay/QuestSystem/Quest.h"

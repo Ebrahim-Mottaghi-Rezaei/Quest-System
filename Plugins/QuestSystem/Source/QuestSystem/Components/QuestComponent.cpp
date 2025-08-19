@@ -1,6 +1,7 @@
 // Copyright Ebrahim Mottaghi Rezaei [https://www.linkedin.com/in/ebrahim-mr/]. All Rights Reserved
 
 #include "QuestComponent.h"
+#include "GameFramework/Actor.h"
 #include "QuestSystem/QuestSystem.h"
 #include "QuestSystem/Gameplay/QuestSystem/Quest.h"
 
