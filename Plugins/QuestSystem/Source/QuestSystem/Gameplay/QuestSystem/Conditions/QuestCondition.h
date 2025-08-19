@@ -7,6 +7,8 @@
 #include "UObject/Object.h"
 #include "QuestCondition.generated.h"
 
+class UWorld;
+
 UCLASS( Abstract, Blueprintable, EditInlineNew )
 class QUESTSYSTEM_API UQuestCondition : public UObject {
 	GENERATED_BODY()

@@ -2,6 +2,7 @@
 
 #include "Quest.h"
 #include "Conditions/QuestCondition.h"
+#include "Engine/World.h"
 #include "Kismet/GameplayStatics.h"
 #include "QuestSystem/QuestSystem.h"
 #include "QuestSystem/Components/QuestComponent.h"

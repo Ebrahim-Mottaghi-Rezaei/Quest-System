@@ -1,6 +1,8 @@
 ﻿// Copyright Ebrahim Mottaghi Rezaei <https://www.linkedin.com/in/ebrahim-mr>. All Rights Reserved 2025. 
 
 #include "HasItemsCondition.h"
+#include "Engine/World.h"
+#include "GameFramework/PlayerController.h"
 #include "Kismet/GameplayStatics.h"
 #include "QuestSystem/QuestSystem.h"
 #include "QuestSystem/Components/InventoryComponent.h"
