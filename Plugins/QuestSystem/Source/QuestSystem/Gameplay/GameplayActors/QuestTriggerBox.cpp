@@ -30,8 +30,21 @@ void AQuestTriggerBox::NotifyActorBeginOverlap(AActor* OtherActor) {
 		return;
 	}
 
-	const auto Controller     = Cast<APawn>( OtherActor )->GetController();
+	if ( !OtherActor->IsA( APawn::StaticClass() ) )
+		return;
+
+	const auto Controller = Cast<APawn>( OtherActor )->GetController();
+	if ( !IsValid( Controller ) ) {
+		UE_LOG( LogQuestSystem, Log, TEXT("Controller is null.") )
+		return;
+	}
+
 	const auto QuestComponent = IQuestInterface::Execute_GetQuestComponent( Controller );
+	if ( !IsValid( QuestComponent ) ) {
+		UE_LOG( LogQuestSystem, Log, TEXT("QuestComponent is null.") )
+		return;
+	}
+
 	if ( Action == EQuestTriggerVolumeAction::Add )
 		QuestComponent->AddQuest( Quest );
 	else
