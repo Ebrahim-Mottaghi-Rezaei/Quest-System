@@ -1,25 +1,30 @@
 {
-	"FileVersion": 3,
-	"Version": 1,
-	"VersionName": "1.0",
-	"EngineVersion": "5.6",
-	"FriendlyName": "QuestSystem",
-	"Description": "An Unreal Engine 5's Modular, flexible and powerful yet simple quest system for projects of any size.",
-	"Category": "Gameplay",
-	"CreatedBy": "Ebrahim Mottaghi Rezaei",
-	"CreatedByURL": "https://www.linkedin.com/in/ebrahim-mr/",
-	"DocsURL": "https://github.com/Ebrahim-Mottaghi-Rezaei/Quest-System?tab=readme-ov-file#-installation",
-	"MarketplaceURL": "com.epicgames.launcher://ue/Fab/product/97225ffd-a042-4522-b72e-38a3926a25d4",
-	"SupportURL": "https://github.com/Ebrahim-Mottaghi-Rezaei/Quest-System/issues",
-	"CanContainContent": true,
-	"IsBetaVersion": true,
-	"IsExperimentalVersion": false,
-	"Installed": false,
-	"Modules": [
-		{
-			"Name": "QuestSystem",
-			"Type": "Runtime",
-			"LoadingPhase": "Default"
-		}
-	]
+  "FileVersion": 3,
+  "Version": 1,
+  "VersionName": "1.0",
+  "EngineVersion": "5.6",
+  "FriendlyName": "QuestSystem",
+  "Description": "An Unreal Engine 5's Modular, flexible and powerful yet simple quest system for projects of any size.",
+  "Category": "Gameplay",
+  "CreatedBy": "Ebrahim Mottaghi Rezaei",
+  "CreatedByURL": "https://www.linkedin.com/in/ebrahim-mr/",
+  "DocsURL": "https://github.com/Ebrahim-Mottaghi-Rezaei/Quest-System?tab=readme-ov-file#-installation",
+  "MarketplaceURL": "com.epicgames.launcher://ue/Fab/product/97225ffd-a042-4522-b72e-38a3926a25d4",
+  "SupportURL": "https://github.com/Ebrahim-Mottaghi-Rezaei/Quest-System/issues",
+  "CanContainContent": true,
+  "IsBetaVersion": true,
+  "IsExperimentalVersion": false,
+  "Installed": false,
+  "Modules": [
+    {
+      "Name": "QuestSystem",
+      "Type": "Runtime",
+      "LoadingPhase": "Default",
+      "PlatformAllowList": [
+        "Win64",
+        "Mac",
+        "Linux"
+      ]
+    }
+  ]
 }
