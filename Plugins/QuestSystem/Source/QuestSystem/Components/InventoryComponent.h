@@ -23,7 +23,7 @@ protected:
 	void K2_ItemAdded(UGameplayItemData* Item);
 
 	UFUNCTION( BlueprintCallable, Category="InventoryComponent" )
-	FORCEINLINE void Notify_ItemAdded(UGameplayItemData* Item) {
+	void Notify_ItemAdded(UGameplayItemData* Item) {
 		OnItemAdded.Broadcast( Item );
 		K2_ItemAdded( Item );
 	}
@@ -41,7 +41,7 @@ protected:
 	void K2_ItemUpdated(UGameplayItemData* Item, uint8 Count);
 
 	UFUNCTION( BlueprintCallable, Category="InventoryComponent" )
-	FORCEINLINE void Notify_ItemUpdated(UGameplayItemData* Item, uint8 Count) {
+	void Notify_ItemUpdated(UGameplayItemData* Item, uint8 Count) {
 		OnItemUpdated.Broadcast( Item, Count );
 		K2_ItemUpdated( Item, Count );
 	}

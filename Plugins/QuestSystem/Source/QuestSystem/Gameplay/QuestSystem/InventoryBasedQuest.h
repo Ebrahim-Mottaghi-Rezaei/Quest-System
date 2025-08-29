@@ -15,8 +15,6 @@ class QUESTSYSTEM_API UInventoryBasedQuest : public UQuest {
 public:
 	UInventoryBasedQuest();
 
-	virtual ~UInventoryBasedQuest() override;
-
 protected:
 	virtual void UpdateStatus(EQuestStatus NewStatus) override;
 
@@ -28,6 +26,8 @@ protected:
 	UFUNCTION()
 	void OnItemUpdatedInInventory(UGameplayItemData* Item, uint8 Count);
 
-	UPROPERTY()
-	TSoftObjectPtr<UInventoryComponent> InventoryComponent;
+	virtual void CleanUp() override;
+
+	UPROPERTY(Transient)
+	TWeakObjectPtr<UInventoryComponent> InventoryComponent;
 };

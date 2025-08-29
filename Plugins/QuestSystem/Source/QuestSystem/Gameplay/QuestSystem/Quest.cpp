@@ -20,12 +20,15 @@ UQuest::UQuest() {
 	Condition      = nullptr;
 }
 
-UQuest::~UQuest() {
-	if ( !QuestComponent.IsValid() )
-		return;
+void UQuest::BeginDestroy() {
+	CleanUp();
 
-	if ( QuestComponent->OnQuestStatusChanged.IsAlreadyBound( this, &ThisClass::OnQuestStatusChanged ) )
-		QuestComponent->OnQuestStatusChanged.RemoveDynamic( this, &ThisClass::OnQuestStatusChanged );
+	Super::BeginDestroy();
+}
+
+void UQuest::CleanUp() {
+	if ( UQuestComponent* Comp = QuestComponent.Get() )
+		Comp->OnQuestStatusChanged.RemoveDynamic( this, &ThisClass::OnQuestStatusChanged );
 
 	QuestComponent.Reset();
 }
@@ -109,9 +112,12 @@ void UQuest::UpdateStatus(const EQuestStatus NewStatus) {
 }
 
 void UQuest::OnQuestStatusChanged(UQuest* Quest, EQuestStatus NewStatus) {
-	if ( NewStatus == EQuestStatus::Failed )
+	if ( NewStatus == EQuestStatus::Failed ) {
 		UpdateStatus( EQuestStatus::Failed );
-	else if ( Condition->Evaluate_Implementation() == EQuestStatus::Completed )
+		return;
+	}
+
+	if ( Condition && Condition->Evaluate() == EQuestStatus::Completed )
 		UpdateStatus( EQuestStatus::Completed );
 }
 
@@ -119,17 +125,16 @@ UWorld* UQuest::GetWorld() const {
 	if ( HasAllFlags( RF_ClassDefaultObject ) )
 		return nullptr;
 
-	auto Outer = GetOuter();
+	for ( auto Outer = GetOuter(); Outer; Outer = Outer->GetOuter() ) {
+		if ( !Outer->IsValidLowLevelFast() )
+			break;
 
-	while ( Outer->IsValidLowLevelFast() ) {
 		if ( UWorld* World = Outer->GetWorld() )
 			return World;
-
-		Outer = Outer->GetOuter();
 	}
-
 	return nullptr;
 }
+
 #if WITH_EDITOR
 FColor UQuest::GetColorBasedOnStatus(const EQuestStatus NewStatus) {
 	switch ( NewStatus ) {

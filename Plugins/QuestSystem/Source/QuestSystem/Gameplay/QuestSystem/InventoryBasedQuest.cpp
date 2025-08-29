@@ -11,18 +11,6 @@ UInventoryBasedQuest::UInventoryBasedQuest() {
 	InventoryComponent = nullptr;
 }
 
-UInventoryBasedQuest::~UInventoryBasedQuest() {
-	if ( InventoryComponent.IsValid() ) {
-		if ( InventoryComponent->OnItemAdded.IsAlreadyBound( this, &ThisClass::OnItemAddedToInventory ) )
-			InventoryComponent->OnItemAdded.AddDynamic( this, &ThisClass::OnItemAddedToInventory );
-
-		if ( InventoryComponent->OnItemUpdated.IsAlreadyBound( this, &ThisClass::OnItemUpdatedInInventory ) )
-			InventoryComponent->OnItemUpdated.AddDynamic( this, &ThisClass::OnItemUpdatedInInventory );
-
-		InventoryComponent.Reset();
-	}
-}
-
 void UInventoryBasedQuest::UpdateStatus(EQuestStatus NewStatus) {
 	if ( Status == NewStatus )
 		return;
@@ -81,4 +69,15 @@ void UInventoryBasedQuest::OnItemUpdatedInInventory(UGameplayItemData* Item, uin
 
 	if ( bRelevantItemFound && Condition->Evaluate_Implementation() == EQuestStatus::Completed )
 		UpdateStatus( EQuestStatus::Completed );
+}
+
+void UInventoryBasedQuest::CleanUp() {
+	if ( auto Comp = InventoryComponent.Get() ) {
+		Comp->OnItemAdded.RemoveDynamic( this, &ThisClass::OnItemAddedToInventory );
+		Comp->OnItemUpdated.RemoveDynamic( this, &ThisClass::OnItemUpdatedInInventory );
+	}
+
+	InventoryComponent.Reset();
+
+	Super::CleanUp();
 }

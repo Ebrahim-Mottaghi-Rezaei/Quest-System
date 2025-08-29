@@ -3,9 +3,10 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "QuestSystem/DataTypes/Enums.h"
 #include "Delegates.generated.h"
 
-UCLASS( Hidden, HideDropdown )
+UCLASS( NotBlueprintable )
 class QUESTSYSTEM_API UQuestDummy : public UObject {
 	GENERATED_BODY()
 };

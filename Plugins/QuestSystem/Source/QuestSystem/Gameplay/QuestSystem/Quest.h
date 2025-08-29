@@ -26,16 +26,16 @@ protected:
 	void K2_StatusChanged(UQuest* Quest, EQuestStatus NewStatus);
 
 	UFUNCTION( BlueprintCallable, Category="Quest" )
-	FORCEINLINE void Notify_StatusChanged(UQuest* Quest, EQuestStatus NewStatus) {
+	void Notify_StatusChanged(UQuest* Quest, EQuestStatus NewStatus) {
 #if WITH_EDITOR
-		const auto Message = FString::Printf( TEXT( "Quest: %s state changed to: %s" ), *Name.ToString(), *StaticEnum<EQuestStatus>()->GetNameStringByValue( static_cast<int64>(NewStatus) ) );
-
-		if ( GEngine ) {
-			int key = GetTypeHash( Id );
-			GEngine->AddOnScreenDebugMessage( key, 100.0f, GetColorBasedOnStatus( NewStatus ), *Message );
+		if ( bScreenLog ) {
+			const auto Message = FString::Printf( TEXT( "Quest: %s state: %s" ), *Name.ToString(), *StaticEnum<EQuestStatus>()->GetNameStringByValue( static_cast<int64>(NewStatus) ) );
+			if ( GEngine ) {
+				int key = GetTypeHash( Id );
+				GEngine->AddOnScreenDebugMessage( key, bScreenLogDuration, GetColorBasedOnStatus( NewStatus ), *Message );
+			}
+			UE_LOG( LogQuestSystem, Verbose, TEXT("%s"), *Message );
 		}
-
-		UE_LOG( LogQuestSystem, Verbose, TEXT("%s"), *Message );
 #endif
 		OnStatusChanged.Broadcast( Quest, NewStatus );
 		K2_StatusChanged( Quest, NewStatus );
@@ -49,10 +49,10 @@ public:
 
 	UQuest();
 
-	virtual ~UQuest() override;
+	virtual void BeginDestroy() override;
 
 protected:
-	UPROPERTY( BlueprintReadOnly, Category="Quest" )
+	UPROPERTY( BlueprintReadOnly, EditDefaultsOnly, AdvancedDisplay, Category="Quest" )
 	FGuid Id;
 
 	UPROPERTY( EditAnywhere, BlueprintReadWrite, Category="Quest" )
@@ -72,6 +72,13 @@ protected:
 
 	UPROPERTY( BlueprintReadOnly, EditDefaultsOnly, Category="Quest" )
 	bool bIsTickable;
+
+#if WITH_EDITOR
+	UPROPERTY( BlueprintReadOnly, EditDefaultsOnly, Category="Quest", AdvancedDisplay )
+	bool bScreenLog = true;
+	UPROPERTY( BlueprintReadOnly, EditDefaultsOnly, Category="Quest", AdvancedDisplay, meta=( EditCondition="bScreenLog", EditConditionHides) )
+	float bScreenLogDuration = 60.0f;
+#endif
 
 	// FTickableGameObject interface
 	virtual void Tick(float DeltaTime) override;
@@ -101,6 +108,8 @@ protected:
 	UQuestComponent* GetQuestComponent() const;
 
 	UInventoryComponent* GetInventoryComponent() const;
+
+	virtual void CleanUp();
 
 public:
 	FORCEINLINE FGuid GetId() const {
@@ -137,6 +146,6 @@ protected:
 	virtual void PostDuplicate(bool bDuplicateForPIE) override;
 #endif
 
-	UPROPERTY()
-	TSoftObjectPtr<UQuestComponent> QuestComponent;
+	UPROPERTY(Transient)
+	TWeakObjectPtr<UQuestComponent> QuestComponent;
 };
