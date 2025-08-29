@@ -27,14 +27,14 @@ protected:
 
 	UFUNCTION( BlueprintCallable, Category="Quest" )
 	void Notify_StatusChanged(UQuest* Quest, EQuestStatus NewStatus) {
-#if WITH_EDITOR
+#if WITH_EDITORONLY_DATA
 		if ( bScreenLog ) {
 			const auto Message = FString::Printf( TEXT( "Quest: %s state: %s" ), *Name.ToString(), *StaticEnum<EQuestStatus>()->GetNameStringByValue( static_cast<int64>(NewStatus) ) );
 			if ( GEngine ) {
 				int key = GetTypeHash( Id );
-				GEngine->AddOnScreenDebugMessage( key, bScreenLogDuration, GetColorBasedOnStatus( NewStatus ), *Message );
+				GEngine->AddOnScreenDebugMessage( key, ScreenLogDuration, GetColorBasedOnStatus( NewStatus ), *Message );
 			}
-			UE_LOG( LogQuestSystem, Verbose, TEXT("%s"), *Message );
+			UE_LOG( LogQuestSystem, Verbose, TEXT( "%s" ), *Message );
 		}
 #endif
 		OnStatusChanged.Broadcast( Quest, NewStatus );
@@ -73,11 +73,12 @@ protected:
 	UPROPERTY( BlueprintReadOnly, EditDefaultsOnly, Category="Quest" )
 	bool bIsTickable;
 
-#if WITH_EDITOR
-	UPROPERTY( BlueprintReadOnly, EditDefaultsOnly, Category="Quest", AdvancedDisplay )
+#if WITH_EDITORONLY_DATA
+	UPROPERTY( BlueprintReadOnly, EditDefaultsOnly, Category = "Quest", AdvancedDisplay )
 	bool bScreenLog = true;
-	UPROPERTY( BlueprintReadOnly, EditDefaultsOnly, Category="Quest", AdvancedDisplay, meta=( EditCondition="bScreenLog", EditConditionHides) )
-	float bScreenLogDuration = 60.0f;
+
+	UPROPERTY( BlueprintReadOnly, EditDefaultsOnly, Category = "Quest", AdvancedDisplay, meta = (EditCondition = "bScreenLog", EditConditionHides) )
+	float ScreenLogDuration = 60.0f;
 #endif
 
 	// FTickableGameObject interface
@@ -146,6 +147,6 @@ protected:
 	virtual void PostDuplicate(bool bDuplicateForPIE) override;
 #endif
 
-	UPROPERTY(Transient)
+	UPROPERTY( Transient )
 	TWeakObjectPtr<UQuestComponent> QuestComponent;
 };
