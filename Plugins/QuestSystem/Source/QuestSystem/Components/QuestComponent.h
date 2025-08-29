@@ -23,7 +23,7 @@ protected:
 	void K2_QuestAdded(UQuest* Quest);
 
 	UFUNCTION( BlueprintCallable, Category="QuestComponent" )
-	FORCEINLINE void Notify_QuestAdded(UQuest* Quest) {
+	void Notify_QuestAdded(UQuest* Quest) {
 		OnQuestAdded.Broadcast( Quest );
 		K2_QuestAdded( Quest );
 	}
@@ -40,7 +40,7 @@ protected:
 	void K2_QuestStatusChanged(UQuest* Quest, EQuestStatus NewStatus);
 
 	UFUNCTION( BlueprintCallable, Category="QuestComponent" )
-	FORCEINLINE void Notify_QuestStatusChanged(UQuest* Quest, EQuestStatus NewStatus) {
+	void Notify_QuestStatusChanged(UQuest* Quest, EQuestStatus NewStatus) {
 		OnQuestStatusChanged.Broadcast( Quest, NewStatus );
 		K2_QuestStatusChanged( Quest, NewStatus );
 	}
