@@ -1,7 +1,7 @@
 cls
 echo off
 
-set "PROJECT_PATH=C:\Users\emott\OneDrive\Documents\Unreal Projects\QuestProject"
+set "PROJECT_PATH=C:\Users\UserName\Documents\Unreal Projects\QuestProject"
 
 :: Navigate to project folder
 cd /d "%PROJECT_PATH%"
